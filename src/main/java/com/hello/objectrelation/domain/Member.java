@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+//@Entity
 @NoArgsConstructor
 public class Member {
 
@@ -17,9 +17,14 @@ public class Member {
     private String id;
 
     private String username;
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Member(String id, String username) {
         this.id = id;

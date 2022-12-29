@@ -8,12 +8,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 @Slf4j
 @Controller
 public class StartController {
 
-    @PostConstruct
+
+
+    //@PostConstruct
     void start() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myFactory");
         EntityManager em = emf.createEntityManager();
@@ -48,12 +51,26 @@ public class StartController {
         transaction.commit();
         log.info("수정 커밋을 완료합니다.");
 
-        log.info("연관 관계를 삭제합니다.");
+//        log.info("연관 관계를 삭제합니다.");
+//        transaction.begin();
+//
+//        member1.setTeam(null);
+//
+//        transaction.commit();
+//        log.info("연관 관계 삭제 커밋을 완료합니다.");
+
+
         transaction.begin();
-
-        member1.setTeam(null);
-
+        log.info("팀 연관관계 주입 시작");
         transaction.commit();
-        log.info("연관 관계 삭제 커밋을 완료합니다.");
+        log.info("팀 연관관계 커밋 완료");
+
+        Team team1 = em.find(Team.class, "team1");
+        log.info("team1 = {}", team1.getName());
+        List<Member> members = team1.getMembers();
+        log.info("members = {}", members);
+        for (Member m : members) {
+            log.info("member.username = {}", m.getUsername());
+        }
     }
 }
