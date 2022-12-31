@@ -1,4 +1,4 @@
-package com.hello.objectrelation.relation.v2.oneway;
+package com.hello.objectrelation.relation.v3.oneway;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 //@Entity
 @Getter
 @NoArgsConstructor
-public class MemberV2 {
+public class MemberV3 {
 
     @Id
     @Column(name = "MEMBER_ID")
@@ -17,12 +17,11 @@ public class MemberV2 {
 
     private String username;
 
-//    1:N 양방향 예시
-//    @ManyToOne
-//    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
-//    private TeamV2 team;
+    @OneToOne
+    @JoinColumn(name = "CAR_ID")
+    private CarV3 car;
 
-    public MemberV2(String username) {
+    public MemberV3(String username) {
         this.username = username;
     }
 }
