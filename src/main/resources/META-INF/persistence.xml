@@ -9,8 +9,8 @@
 <!--        <class>com.hello.objectrelation.domain.Member</class>-->
 <!--        <class>com.hello.objectrelation.relation.v1.oneway.MemberV1</class>-->
 <!--        <class>com.hello.objectrelation.relation.v1.oneway.TeamV1</class>-->
-        <class>com.hello.objectrelation.relation.v2.oneway.MemberV2</class>
-        <class>com.hello.objectrelation.relation.v2.oneway.TeamV2</class>
+        <class>com.hello.objectrelation.proxy.Member</class>
+        <class>com.hello.objectrelation.proxy.Team</class>
         <properties>
         <!--필수속성-->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
