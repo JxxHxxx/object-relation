@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -16,15 +17,19 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, length = 10)
     private String username;
 
-//    @ManyToOne() 즉시 로딩
-    @ManyToOne(fetch = FetchType.LAZY)
+    private LocalDate createDate;
+    // 즉시 로딩
+    @ManyToOne()
+//    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
     public Member(String username) {
         this.username = username;
+        this.createDate = LocalDate.now();
     }
 
     public void setTeam(Team team) {

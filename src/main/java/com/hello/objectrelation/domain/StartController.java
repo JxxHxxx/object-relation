@@ -14,8 +14,6 @@ import java.util.List;
 @Controller
 public class StartController {
 
-
-
     //@PostConstruct
     void start() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myFactory");
