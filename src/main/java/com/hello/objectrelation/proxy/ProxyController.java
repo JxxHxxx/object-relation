@@ -23,35 +23,21 @@ public class ProxyController {
         transaction.begin();
 
         Member memberA = new Member("jamong");
-        Member memberB = new Member("podo");
+        em.persist(memberA);
 
         Team team = new Team("hanghae");
-        memberA.setTeam(team);
-        em.persist(memberA);
-        em.persist(memberB);
+        memberA.addTeam(team);
         em.persist(team);
-
         em.flush();
-        em.clear();
+//        em.clear();
 
-
-//        Member member = em.find(Member.class, memberA.getId());
-        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-
-        /**
-         * N + 1 해결 방법 1. Join Fetch
-         */
-        em.createQuery("select m from Member m Join fetch m.team", Member.class);
-
-        /**
-         * N + 1 해결 방법 2. @EntityGraph
-         */
-
-        /**
-         * N + 1 해결 방법 3. Batch Size
-         */
-
-
+        Team findTeam = em.find(Team.class, team.getId());
+        List<Member> members = findTeam.getMembers();
+        System.out.println("====================================");
+        for (Member member : members) {
+            System.out.println("member.getUsername() = " + member.getUsername());
+        }
+        System.out.println("====================================");
         transaction.commit();
         em.clear();
     }

@@ -3,12 +3,13 @@ package com.hello.objectrelation.proxy;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -20,7 +21,7 @@ public class Member {
     @Column(unique = true, length = 10)
     private String username;
 
-    private LocalDate createDate;
+//    private LocalDate createDate;
     // 즉시 로딩
     @ManyToOne()
 //    @ManyToOne(fetch = FetchType.LAZY)
@@ -29,10 +30,10 @@ public class Member {
 
     public Member(String username) {
         this.username = username;
-        this.createDate = LocalDate.now();
     }
 
-    public void setTeam(Team team) {
+    public void addTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this);
     }
 }
